@@ -5,7 +5,8 @@
   "main": "server/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/main.js"
+    "start": "node server/main.js",
+    "deploy": "git push && git push origin master:gh-pages && git push heroku master"
   },
   "engines": {
     "node": "6.8.1",
