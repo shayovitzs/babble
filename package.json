@@ -2,10 +2,10 @@
   "name": "bable",
   "version": "1.0.0",
   "description": "",
-  "main": "server/main.js",
+  "main": "foo.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/main.js"
+    "start": "node foo.js"
   },
   "engines": {
     "node": "6.8.1",
