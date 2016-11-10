@@ -17,6 +17,8 @@ function handleRequest (request, response) {
 
   var requestUrl = url.parse(request.url, true);
 
+  response.setHeader('Access-Control-Allow-Origin', '*');
+
   if (requestUrl.pathname === '/status') {
     response.writeHead(200, {
       'Content-Type': 'text/html'
