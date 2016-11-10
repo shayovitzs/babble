@@ -3,9 +3,8 @@
 var http = require('http');
 var qs = require('querystring');
 var url = require('url');
-var proccess = require('url');
 
-var port = proccess.env.PORT || 9000;
+var port = process.env.PORT || 9000;
 
 var server = http.createServer();
 server.listen(port);
