@@ -1,0 +1,9 @@
+body {
+  color: #333;
+  font-family: sans-serif;
+}
+
+.standout {
+  border-bottom: 1px solid;
+  padding-bottom: 1em;
+}

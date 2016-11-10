@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Babble</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <h1 class="standout">Form Client-Server Flow</h1>
+  <section class="standout">
+    <h2>GET form - Status</h2>
+    <form action="http://localhost:9000/status">
+      <button>Get Status</button>
+    </form>
+  </section>
+  <section class="standout">
+    <h2>POST form - Echo</h2>
+    <form action="http://localhost:9000/echo" method="POST">
+      <label for="message">Message to echo:</label>
+      <input type="text" id="message" name="message">
+      <button>Post message</button>
+    </form>
+  </section>
+</body>
+</html>
