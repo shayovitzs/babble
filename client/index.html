@@ -9,16 +9,16 @@
   <h1 class="standout">Form Client-Server Flow</h1>
   <section class="standout">
     <h2>GET form - Status</h2>
-    <form action="https://babble-server-1.herokuapp.com/status">
+    <form action="http://localhost:9000/status">
       <button>Get Status</button>
     </form>
   </section>
   <section class="standout">
     <h2>POST form - Echo</h2>
-    <form action="https://babble-server-1.herokuapp.com/echo" method="POST">
+    <form action="http://localhost:9000/echo" method="POST">
       <label for="message">Message to echo:</label>
       <input type="text" id="message" name="message">
-      <button>Post message</button>
+      <button>Echo</button>
     </form>
   </section>
 
