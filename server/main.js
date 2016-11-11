@@ -3,6 +3,7 @@
 var http = require('http');
 var qs = require('querystring');
 var url = require('url');
+var messages = require('./messages');
 
 var port = process.env.PORT || 9000;
 
@@ -37,6 +38,8 @@ function handleMessage (request, response) {
   }
   getBufferedRequest(request, function (data) {
     if (data.message) {
+      messages.push(data.message);
+      console.log(messages);
       respondWithHtml(response, 'This is your message: "' + data.message + '"\n');
     } else {
       respondWithStatus(response, 400);
