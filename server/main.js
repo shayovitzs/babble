@@ -20,32 +20,73 @@ function handleRequest (request, response) {
   response.setHeader('Access-Control-Allow-Origin', '*');
 
   if (requestUrl.pathname === '/status') {
-    response.writeHead(200, {
-      'Content-Type': 'text/html'
-    });
-    response.write('OK\n');
-    response.end();
+    handleStatus(request, response);
   } else if (requestUrl.pathname === '/echo') {
-    var requestBody = '';
-    request.on('data', function (chunk) {
-      requestBody += chunk;
-    });
-    request.on('end', function () {
-      var data = qs.parse(requestBody);
-      if (data.message) {
-        response.writeHead(200, {
-          'Content-Type': 'text/html'
-        });
-        response.write('You said: "' + data.message + '"\n');
-      } else {
-        response.writeHead(400);
-        response.write(http.STATUS_CODES[400] + '\n');
-      }
-      response.end();
-    });
+    handleEcho(request, response);
+  } else if (requestUrl.pathname === '/message') {
+    handleMessage(request, response);
   } else {
-    response.writeHead(404);
-    response.write(http.STATUS_CODES[404] + '\n');
-    response.end();
+    respondWithStatus(response, 404);
   }
+}
+
+function handleMessage (request, response) {
+  if (request.method !== 'POST') {
+    respondWithStatus(405);
+    return;
+  }
+  getBufferedRequest(request, function (data) {
+    if (data.message) {
+      respondWithHtml(response, 'This is your message: "' + data.message + '"\n');
+    } else {
+      respondWithStatus(response, 400);
+    }
+  });
+}
+
+function handleStatus (request, response) {
+  if (request.method !== 'GET') {
+    respondWithStatus(405);
+    return;
+  }
+  respondWithHtml(response, 'OK\n');
+}
+
+function handleEcho (request, response) {
+  if (request.method !== 'POST') {
+    respondWithStatus(405);
+    return;
+  }
+  getBufferedRequest(request, function (data) {
+    if (data.echo) {
+      respondWithHtml(response, 'You said: "' + data.echo + '"\n');
+    } else {
+      respondWithStatus(response, 400);
+    }
+  });
+}
+
+function getBufferedRequest (request, onEnd) {
+  var requestBody = '';
+  request.on('data', function (chunk) {
+    requestBody += chunk;
+  });
+  request.on('end', function () {
+    var data = qs.parse(requestBody);
+    onEnd(data);
+  });
+}
+
+function respondWithHtml (response, html) {
+  response.writeHead(200, {
+    'Content-Type': 'text/html'
+  });
+  response.write(html);
+  response.end();
+}
+
+function respondWithStatus (response, code) {
+  response.writeHead(code);
+  response.write(http.STATUS_CODES[code] + '\n');
+  response.end();
 }

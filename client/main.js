@@ -15,10 +15,10 @@ function ajaxify (form) {
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('load', handleResponse);
     xhr.open(form.getAttribute('method') || 'GET', action);
-    xhr.send(serialize(form));
+    xhr.send(serializeForm(form));
   }
 
-  function serialize (form) {
+  function serializeForm (form) {
     var serialized = '';
     for (var i = 0; i < form.elements.length; i++) {
       var element = form.elements[i];
