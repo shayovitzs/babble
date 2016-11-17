@@ -13,8 +13,12 @@ function ajaxify (form) {
     e.preventDefault();
     var action = form.getAttribute('action');
     var xhr = new XMLHttpRequest();
+    var method = form.getAttribute('method') || 'GET';
     xhr.addEventListener('load', handleResponse);
-    xhr.open(form.getAttribute('method') || 'GET', action);
+    xhr.open(method, action);
+    if (method === 'POST') {
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    }
     xhr.send(serializeForm(form));
   }
 
