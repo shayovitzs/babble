@@ -1,17 +1,13 @@
 'use strict';
 
-var http = require('https');
-var fs = require('fs');
+var http = require('http');
 var qs = require('querystring');
 var url = require('url');
 var messages = require('./messages');
 
 var port = process.env.PORT || 9000;
 
-var server = http.createServer({
-  key: fs.readFileSync(__dirname + '/server.key', 'utf8'),
-  cert: fs.readFileSync(__dirname + '/server.crt', 'utf8')
-});
+var server = http.createServer();
 server.listen(port);
 server.on('request', handleRequest);
 console.log('Listening on port %d', port);
